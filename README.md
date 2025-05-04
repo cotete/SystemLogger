@@ -4,13 +4,22 @@
 - Sistema desenvolvido com intuito de monitorar ações que o usuário realiza no sistema
 - Realizado em forma de um aplicativo de console.
 
-
+### Pré-requisitos
+   - Certifique-se de que o runtime do .NET 9 está instalado na máquina.
+   - Caso não esteja, você pode baixá-lo aqui: [Download .NET Runtime](https://dotnet.microsoft.com/download/dotnet/9.0).
+   
 ## Instruções para rodar o projeto
 ### 1 - Clonar repositório
 - `https://github.com/cotete/SystemLogger`
 ### 2 - Acessar pastas
-- ``
-
+- `bin\release\net9.0`
+- Dentro desta pasta executar o: `SystemLogger.exe`
+### 3 - Testar o projeto
+- Nesta etapa só resta testar o projeto.
+- Eventos Monitorados:
+	- Pressionar `Ctrl+c`.
+	- Clique do mouse.
+	- Abertura de arquivos `.pdf`, `.docx` ou `.xlsx`
 
 
 ## Descrição das Pastas e Arquivos
