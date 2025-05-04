@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net9.0": {
+    "net9.0-windows7.0": {
       "Microsoft.Diagnostics.NETCore.Client/0.2.510501": {
         "type": "package",
         "dependencies": {
@@ -196,11 +196,14 @@
       "MouseKeyHook/5.7.1": {
         "type": "package",
         "compile": {
-          "lib/net472/Gma.System.MouseKeyHook.dll": {}
+          "lib/net7.0-windows7.0/Gma.System.MouseKeyHook.dll": {}
         },
         "runtime": {
-          "lib/net472/Gma.System.MouseKeyHook.dll": {}
-        }
+          "lib/net7.0-windows7.0/Gma.System.MouseKeyHook.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
       },
       "System.Collections.Immutable/8.0.0": {
         "type": "package",
@@ -995,7 +998,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net9.0": [
+    "net9.0-windows7.0": [
       "Microsoft.Diagnostics.Tracing.TraceEvent >= 3.1.21",
       "MouseKeyHook >= 5.7.1"
     ]
@@ -1022,7 +1025,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net9.0"
+        "net9.0-windows"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -1030,8 +1033,8 @@
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
+        "net9.0-windows7.0": {
+          "targetAlias": "net9.0-windows",
           "projectReferences": {}
         }
       },
@@ -1048,8 +1051,8 @@
       "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
-      "net9.0": {
-        "targetAlias": "net9.0",
+      "net9.0-windows7.0": {
+        "targetAlias": "net9.0-windows",
         "dependencies": {
           "Microsoft.Diagnostics.Tracing.TraceEvent": {
             "target": "Package",
@@ -1074,22 +1077,13 @@
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WindowsForms": {
+            "privateAssets": "none"
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'MouseKeyHook 5.7.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0'. This package may not be fully compatible with your project.",
-      "libraryId": "MouseKeyHook",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  }
 }
