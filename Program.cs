@@ -16,9 +16,10 @@ namespace KeyMonitorApp
             Program program = new Program();
 
             KeyboardAndMouse keyboardAndMouse = new KeyboardAndMouse();
-            
+            SystemWatcher watcher = new SystemWatcher();
 
-            
+
+            watcher.Start();
             keyboardAndMouse.Start();
 
             Application.Run();
