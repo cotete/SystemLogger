@@ -16,6 +16,11 @@ namespace SystemLogger.Sender
             BaseAddress = new Uri("https://minhaapi.exemplo.com/evento-")
         };
 
+        /// <summary>
+        /// Método utilizado para enviar o objeto (dados do usuário) para a api do sistema.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static async Task Post(Object obj)
         {
             StringContent json = new (JsonSerializer.Serialize(obj), Encoding.UTF8,"application/json");

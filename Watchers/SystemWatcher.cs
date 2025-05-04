@@ -14,6 +14,10 @@ namespace SystemLogger.Watchers
         public TraceEventSession session = new TraceEventSession("Monitor");
         public SystemWatcher() { }
 
+
+        /// <summary>
+        /// Método que realiza todo o monitoramento do sistema, no quesito abertura de arquivos (.pdf,.xlsx,.docx).
+        /// </summary>
         public void Start()
         {
 

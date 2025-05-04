@@ -12,10 +12,11 @@
 ### 1 - Clonar repositório
 - `https://github.com/cotete/SystemLogger`
 ### 2 - Acessar pastas
-- `bin\release\net9.0`
+- `bin\release\net9.0-windows`
 - Dentro desta pasta executar o: `SystemLogger.exe`
 ### 3 - Testar o projeto
 - Nesta etapa só resta testar o projeto.
+- É necessário executar como Administrador!
 - Eventos Monitorados:
 	- Pressionar `Ctrl+c`.
 	- Clique do mouse.

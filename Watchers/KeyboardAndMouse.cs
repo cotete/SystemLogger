@@ -32,6 +32,10 @@ namespace SystemLogger.Watchers
             Console.WriteLine("Monitorando teclas e cliques Pressione ctrl+c para sair.");
         }
 
+        
+        /// <summary>
+        /// Método que detecta cliques do mouse e combinações no teclado (Ctrl+C).
+        /// </summary>
         public void DetectCombinationsAndClicks()
         {
             var map = new Dictionary<Combination, Action>{
@@ -57,7 +61,10 @@ namespace SystemLogger.Watchers
         }
 
         
-
+        /// <summary>
+        /// Método que cria o objeto e envia para a o metodo da classe PostToApi.
+        /// </summary>
+        /// <param name="type"></param>
         private void sendToApi(string type)
         {
 

@@ -9,6 +9,12 @@ namespace SystemLogger.Util
     internal static class ImageConv
     {
         
+
+        /// <summary>
+        /// Método utilizado para converter a imagem para base64
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>string ImageBase64</returns>
         public static string ConverterToBase64(string path)
         {
             Image img = Image.FromFile(path);
