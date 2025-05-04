@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SystemLogger.Sender;
 
 namespace SystemLogger.Watchers
 {
@@ -29,9 +30,18 @@ namespace SystemLogger.Watchers
                 if (cmdLine.Contains(".pdf") || cmdLine.Contains(".docx") || cmdLine.Contains(".xlsx") || cmdLine.Contains(".pdf"))
                 {
                     int index = cmdLine.IndexOf("--single-argument");
-                    string singleArgumentValue = cmdLine.Substring(index + 1).Split(" ")[1];
-                    Console.WriteLine($"Caminho do arquivo: {singleArgumentValue}");
+                    string filePath = cmdLine.Substring(index + 1).Split(" ")[1];
+                    Console.WriteLine($"Caminho do arquivo: {filePath}");
                     Console.WriteLine($"Arquivo: {file}");
+                    object obj = new
+                    {
+                        tipoEvento = "File_Open",
+                        Arquivo = file,
+                        CaminhoArquivo = filePath,
+                        timestamp = DateTime.Now,
+                    };
+                    Console.WriteLine(obj);
+                    PostToApi.Post(obj);
                 }
 
             };
@@ -40,4 +50,6 @@ namespace SystemLogger.Watchers
                 session.Source.Process();
             });
         }
+
+    }
 }
