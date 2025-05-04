@@ -17,12 +17,26 @@ namespace SystemLogger.Util
         /// <returns>string ImageBase64</returns>
         public static string ConverterToBase64(string path)
         {
-            Image img = Image.FromFile(path);
 
-            MemoryStream m = new MemoryStream();
-            img.Save(m, img.RawFormat);
-            byte[] data = m.ToArray();
-            return Convert.ToBase64String(data);
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException($"O arquivo não foi encontrado: {path}");
+            }
+            try
+            {
+                using (Image img = Image.FromFile(path))
+                using (MemoryStream m = new MemoryStream())
+                {
+                    img.Save(m, img.RawFormat);
+                    byte[] data = m.ToArray();
+                    return Convert.ToBase64String(data);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao converter imagem para Base64: {ex.Message}");
+                throw;
+            }
         }
 
     }
