@@ -10,6 +10,7 @@ namespace SystemLogger.Watchers
 {
     internal class KeyboardAndMouse
     {
+        private static readonly string tempPath = System.IO.Path.GetTempPath();
 
         private IMouseEvents _MouseHook;
 
@@ -65,8 +66,8 @@ namespace SystemLogger.Watchers
 
             Graphics captureGraphics = Graphics.FromImage(captureBitmap);
             captureGraphics.CopyFromScreen(captureRectangle.Left, captureRectangle.Top, 0, 0, captureRectangle.Size);
-
-            captureBitmap.Save("D:\\prints\\Capture.jpg", ImageFormat.Jpeg);
+            
+            captureBitmap.Save(tempPath+ "\\capture.jpeg", ImageFormat.Jpeg);
 
             Console.WriteLine("Print captured!");
         }
