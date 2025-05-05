@@ -76,7 +76,7 @@ namespace SystemLogger.Watchers
                 timestamp = DateTime.Now,
                 image = imgString,
             };
-            Console.WriteLine(obj);
+            
             PostToApi.Post(obj);
         }
 

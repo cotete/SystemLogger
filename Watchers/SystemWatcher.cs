@@ -44,7 +44,6 @@ namespace SystemLogger.Watchers
                         CaminhoArquivo = filePath,
                         timestamp = DateTime.Now,
                     };
-                    Console.WriteLine(obj);
                     PostToApi.Post(obj);
                 }
 
