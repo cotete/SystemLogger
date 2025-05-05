@@ -67,17 +67,28 @@ namespace SystemLogger.Watchers
         /// <param name="type"></param>
         private void sendToApi(string type)
         {
-
-            string path = ScreenshotEvent.tempPath + "\\capture.jpeg";
-            string imgString = ImageConv.ConverterToBase64(path);
-            Object obj = new
+            try
             {
-                tipoEvento = type,
-                timestamp = DateTime.Now,
-                image = imgString,
-            };
-            
-            PostToApi.Post(obj);
+                string path = ScreenshotEvent.tempPath + "\\capture.jpeg";
+                string imgString = ImageConv.ConverterToBase64(path);
+                Object obj = new
+                {
+                    tipoEvento = type,
+                    timestamp = DateTime.Now,
+                    image = imgString,
+                };
+
+                PostToApi.Post(obj);
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine("Arquivo de imagem não encontrado: " + ex.Message );
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro: " + ex.Message);
+            }
+
         }
 
     }

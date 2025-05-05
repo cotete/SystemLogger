@@ -29,11 +29,10 @@ namespace SystemLogger.Sender
                 HttpResponseMessage res = await _httpClient.PostAsync("Data", json);
                 res.EnsureSuccessStatusCode();
                 var jsonResponse = await res.Content.ReadAsStringAsync();
-                Console.WriteLine(jsonResponse);
             }
             catch (HttpRequestException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Erro de conexão: " + ex.Message);
             }
             catch (Exception ex)
             {

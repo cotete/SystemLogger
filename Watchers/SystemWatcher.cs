@@ -20,38 +20,44 @@ namespace SystemLogger.Watchers
         /// </summary>
         public void Start()
         {
-
-            session.EnableKernelProvider(KernelTraceEventParser.Keywords.Process);
-
-
-            session.Source.Kernel.ProcessStart += (data) =>
+            try
             {
-                string exeName = data.ImageFileName;
-                string cmdLine = data.CommandLine;
-                var controle = cmdLine.Split("\\");
-                string file = controle[controle.Length - 1];
+                session.EnableKernelProvider(KernelTraceEventParser.Keywords.Process);
 
-                if (cmdLine.Contains(".pdf") || cmdLine.Contains(".docx") || cmdLine.Contains(".xlsx") || cmdLine.Contains(".pdf"))
+
+                session.Source.Kernel.ProcessStart += (data) =>
                 {
-                    int index = cmdLine.IndexOf("--single-argument");
-                    string filePath = cmdLine.Substring(index + 1).Split(" ")[1];
-                    Console.WriteLine($"Caminho do arquivo: {filePath}");
-                    Console.WriteLine($"Arquivo: {file}");
-                    object obj = new
-                    {
-                        tipoEvento = "File_Open",
-                        Arquivo = file,
-                        CaminhoArquivo = filePath,
-                        timestamp = DateTime.Now,
-                    };
-                    PostToApi.Post(obj);
-                }
+                    string exeName = data.ImageFileName;
+                    string cmdLine = data.CommandLine;
+                    var controle = cmdLine.Split("\\");
+                    string file = controle[controle.Length - 1];
 
-            };
-            Task.Run(() =>
-            {
-                session.Source.Process();
-            });
+                    if (cmdLine.Contains(".pdf") || cmdLine.Contains(".docx") || cmdLine.Contains(".xlsx") || cmdLine.Contains(".pdf"))
+                    {
+                        int index = cmdLine.IndexOf("--single-argument");
+                        string filePath = cmdLine.Substring(index + 1).Split(" ")[1];
+                        Console.WriteLine($"Caminho do arquivo: {filePath}");
+                        Console.WriteLine($"Arquivo: {file}");
+                        object obj = new
+                        {
+                            tipoEvento = "File_Open",
+                            Arquivo = file,
+                            CaminhoArquivo = filePath,
+                            timestamp = DateTime.Now,
+                        };
+                        PostToApi.Post(obj);
+                    }
+
+                };
+
+                Task.Run(() =>
+                {
+                    session.Source.Process();
+                });
+            }
+            catch (Exception e) { 
+                Console.WriteLine("Erro: " + e.Message);
+            }
         }
 
     }

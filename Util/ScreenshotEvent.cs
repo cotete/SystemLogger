@@ -12,17 +12,24 @@ namespace SystemLogger.Util
         public static readonly string tempPath = System.IO.Path.GetTempPath();
         public static void CaptureScreen()
         {
-            Rectangle bounds = Screen.GetBounds(Point.Empty);
-            Bitmap captureBitmap = new Bitmap(bounds.Width, bounds.Height, PixelFormat.Format32bppArgb);
+            try
+            {
+                Rectangle bounds = Screen.GetBounds(Point.Empty);
+                Bitmap captureBitmap = new Bitmap(bounds.Width, bounds.Height, PixelFormat.Format32bppArgb);
 
-            Rectangle captureRectangle = Screen.AllScreens[0].Bounds;
+                Rectangle captureRectangle = Screen.AllScreens[0].Bounds;
 
-            Graphics captureGraphics = Graphics.FromImage(captureBitmap);
-            captureGraphics.CopyFromScreen(captureRectangle.Left, captureRectangle.Top, 0, 0, captureRectangle.Size);
+                Graphics captureGraphics = Graphics.FromImage(captureBitmap);
+                captureGraphics.CopyFromScreen(captureRectangle.Left, captureRectangle.Top, 0, 0, captureRectangle.Size);
 
-            captureBitmap.Save(tempPath + "\\capture.jpeg", ImageFormat.Jpeg);
+                captureBitmap.Save(tempPath + "\\capture.jpeg", ImageFormat.Jpeg);
 
-            Console.WriteLine("Print capturada!");
+                Console.WriteLine("Print capturada!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro: " + ex.Message);
+            }
         }
     }
 }
