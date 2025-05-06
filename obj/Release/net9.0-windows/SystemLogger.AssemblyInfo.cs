@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SystemLogger")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27cddd62fd0a305321f9233b2f06bcd2f2cb639e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbf576b980fde73ae593cd78799bee964f3a183f")]
 [assembly: System.Reflection.AssemblyProductAttribute("SystemLogger")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SystemLogger")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

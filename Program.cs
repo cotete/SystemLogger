@@ -1,10 +1,10 @@
-﻿
-using System;
+﻿using System;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using SystemLogger.Watchers;
 
 
-namespace KeyMonitorApp
+namespace SystemLogger
 {
     internal class Program
     {
@@ -12,7 +12,6 @@ namespace KeyMonitorApp
 
         static void Main(string[] args)
         {
-
             Program program = new Program();
 
             KeyboardAndMouse keyboardAndMouse = new KeyboardAndMouse();
@@ -22,9 +21,13 @@ namespace KeyMonitorApp
             watcher.Start();
             keyboardAndMouse.Start();
 
+
             Application.Run();
 
         }
+
+
+        
 
     }
 }
